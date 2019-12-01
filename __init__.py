@@ -1,1 +1,1 @@
-__author__ = Duong Vu
+__author__ = "Duong Vu"
