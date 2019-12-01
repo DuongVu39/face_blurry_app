@@ -1,2 +1,2 @@
-# face_blurry_app
-playing with face detection and try to blur it 
+## face_blurry
+Blur face if detect any
