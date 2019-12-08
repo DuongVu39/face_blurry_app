@@ -1,9 +1,12 @@
+import cv2
+import numpy as np
 from abc import ABC, abstractmethod
 from typing import Dict, Iterable, Any
 from pathlib import Path
 from loguru import logger
 from skimage.feature import Cascade
 from skimage import data as skimage_data
+# TODO: find another face detector model to add on
 
 
 class BaseModel(ABC):
@@ -60,3 +63,26 @@ class SkimageCascadeModel(BaseModel):
                                                  min_size=(min_w, min_h),
                                                  max_size=(max_w, max_h))
         return detected
+
+
+class YoloFaceModel(BaseModel):
+
+    def __init__(self):
+        """Adapted from https://github.com/sthanhng/yoloface"""
+        super(YoloFaceModel, self).__init__()
+
+    def load_weight(self, weight_path: Path):
+        if weight_path.exists():
+            # TODO: Implement loading weight file from local path
+            pass
+        else:
+            logger.warning("No existing path was provided, using default weights")
+            weight_path = './model-weights/yolo3-wider_16000.weights'
+
+        return weight_path
+
+    def initialize_model(self, weights: Any):
+        pass
+
+    def predict(self, x):
+        pass
