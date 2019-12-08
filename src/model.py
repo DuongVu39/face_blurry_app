@@ -1,11 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Iterable, Any
+from typing import Dict, Iterable, Any
 from pathlib import Path
-
+from loguru import logger
 from skimage.feature import Cascade
 from skimage import data as skimage_data
-
-# TODO: Create a Model class to decide which model used to detect face
 
 
 class BaseModel(ABC):
@@ -34,15 +32,19 @@ class SkimageCascadeModel(BaseModel):
 
     def load_weight(self, weight_path: Path) -> Any:
         if weight_path.exists():
+            # TODO: Implement loading weight file from local path
             pass
         else:
+            logger.warning("No existing path was provided, using default weights")
             weight_path = skimage_data.lbp_frontal_face_cascade_filename()
 
         return weight_path
 
     def initialize_model(self, weights: Any=None) -> None:
-        if weights is None:
-            weights = self.load_weight(weight_path=Path("fdagsgfg"))
+        if weights is None:  # passing a non existent directory
+            weights = self.load_weight(weight_path=Path("fdagkjhkjhlkfytfkjhfg"))
+        else:
+            weights = self.load_weight(weight_path=Path(weights))
 
         self.model = Cascade(weights)
 
