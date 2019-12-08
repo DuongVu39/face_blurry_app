@@ -1,3 +1,5 @@
 skimage
 loguru
 matplotlib
+cv2
+numpy
