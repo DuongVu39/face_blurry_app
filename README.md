@@ -22,7 +22,7 @@ Result photo will be saved in result folder
 
 Result will look like this:
 
-![](results\Blurred_default_img.png)
+![](results/Blurred_default_img.png)
 
 ## Requirement packages
 
