@@ -46,7 +46,7 @@ class FaceBlurrer(BaseBlurrer):
             raise NotImplementedError("Only Cascade model is supported right now")
 
     def get_object(self, row, col, height, width):
-        objects = self.img[row:(row + width), col:(col + height)]
+        objects = self.img[row:row + width, col:col + height]
         return objects
 
     @staticmethod
@@ -59,12 +59,15 @@ class FaceBlurrer(BaseBlurrer):
         blurred_obj = (blurred_obj * 255) // 1
         return blurred_obj
 
-    def blur_object(self, obj_bb) -> None:
+    def blur_object(self, obj_bb, blur_size_ratio: float = 0.1) -> None:
+        #  TODO: increase the size of the detected face a little bit.
+        blur_size = obj_bb['height'] * blur_size_ratio
+
         # get the variables:
-        row = obj_bb['r']
-        col = obj_bb['c']
-        width = obj_bb['width']
-        height = obj_bb['height']
+        row = int(obj_bb['r'] - blur_size)
+        col = int(obj_bb['c'] - blur_size)
+        width = int(obj_bb['width'] + 2 * blur_size)
+        height = int(obj_bb['height'] + 2 * blur_size)
 
         # blur face
         objects = self.get_object(row, col, height, width)

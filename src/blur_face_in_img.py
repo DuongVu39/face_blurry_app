@@ -32,7 +32,10 @@ def save_result(input_path, img) -> bool:
 
 def load_img(input_path):
     if len(input_path) > 0:
-        img = skimage_io.imread(Path("data") / input_path)
+        if Path(Path("data") / input_path).exists():
+            img = skimage_io.imread(Path("data") / input_path)
+        else:
+            raise ValueError("Image path does not exists!")
     else:
         img = data.astronaut()
     return img
