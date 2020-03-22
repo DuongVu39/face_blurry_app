@@ -87,7 +87,7 @@ class YoloFaceModel(BaseModel):
         else:
             weights = self.load_weight(Path(weights))
 
-        self.model = cv2.dnn.readNet(os.path.abspath(weights), os.path.abspath('../config/yolov3-face.cfg'))
+        self.model = cv2.dnn.readNet(os.path.abspath(weights), os.path.abspath('../config/yolov3-face-lf.cfg'))
         self.model.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         self.model.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
