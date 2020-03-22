@@ -1,5 +1,5 @@
+import os
 import cv2
-import numpy as np
 from abc import ABC, abstractmethod
 from typing import Dict, Iterable, Any
 from pathlib import Path
@@ -77,12 +77,19 @@ class YoloFaceModel(BaseModel):
             pass
         else:
             logger.warning("No existing path was provided, using default weights")
-            weight_path = './model-weights/yolo3-wider_16000.weights'
+            weight_path = '../data/model_weights/yolo3-wider_16000.weights'
 
         return weight_path
 
-    def initialize_model(self, weights: Any):
-        pass
+    def initialize_model(self, weights: Any=None):
+        if weights is None:  # passing a non existent directory
+            weights = self.load_weight(Path("fdagkjhkjhlkfytfkjhfg"))
+        else:
+            weights = self.load_weight(Path(weights))
+
+        self.model = cv2.dnn.readNet(os.path.abspath(weights), os.path.abspath('../config/yolov3-face.cfg'))
+        self.model.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+        self.model.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
     def predict(self, x):
         pass
