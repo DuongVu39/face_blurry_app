@@ -4,8 +4,6 @@
 
 An app to blur face if detect any
 
-
-
 ## Usage
 
 Using default photo:
@@ -24,6 +22,12 @@ Result will look like this:
 
 ![](results/Blurred_default_img.png)
 
-## Requirement packages
+## Required packages
 
 See [requirements.txt](requirements.txt)
+
+## To do:
+- Find another face detector model to add on (YOLOv3)
+- Implement loading weight file from local path
+- Write more unit tests
+- Set it as a service to send a picture to and it will spit out the result
