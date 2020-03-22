@@ -6,6 +6,7 @@ An app to blur face if detect any
 
 ## Usage
 
+If use YOLO model, run [get_models.sh](model_weights) to get model weights
 Using default photo:
 
 ``` python src/blur_face_in_img.py```
